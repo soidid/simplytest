@@ -144,6 +144,21 @@ input{
   width: 20px;
   margin-left: 10px;
 }
+.q_title_mobile_inner {
+  padding-left: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  display: none;
+
+}
+@media screen and (max-width: 600px){
+  .q_order {
+    display: none;
+  }
+  .q_title_mobile_inner {
+    display: block;
+  }
+}
 .q_vote {
   width: 70px;
   padding-right: 15px;

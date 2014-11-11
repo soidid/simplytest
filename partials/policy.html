@@ -47,6 +47,7 @@
     </div>
 
     <div class="q_content" ng-if="showQuestion(q.id)">
+        <div class="q_title_mobile_inner">{{q.title}}</div>
         <p class="q_text" ng-repeat="p in q.content">{{p}}</p>
         <div class="q_postmeta">提問人：someid / 提問時間：{{q.post_timestamp | date:'MM-dd hh:mm'}}</div>
         <div class="q_action">
