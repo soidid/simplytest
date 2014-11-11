@@ -97,6 +97,9 @@ input{
 .l_center {
   text-align: center;
 }
+.v_top {
+  vertical-align: top;
+}
 .q_title{
   display: inline-block;
   white-space: nowrap;
@@ -274,7 +277,6 @@ a.button.facebook{
   padding-bottom: 5px;
   margin-bottom: 10px;
   cursor: pointer;
-
 }
 .p_actionicon {
   display: none;
@@ -295,7 +297,6 @@ a.button.facebook{
 }
 .p_seeall:hover {
   border-bottom: 1px solid #03A9F4;
-
   opacity: 0.8;
   /* IE 8 */
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
@@ -325,4 +326,28 @@ a.button.facebook{
   margin: 10px;
   font-size: 20px;
   font-weight: 700;
+}
+/* ------------------------------------------------------------ */
+/* index / policy list
+/* ------------------------------------------------------------ */
+.c_item {
+  background: white;
+  width: 200px;
+  height: 200px;
+  padding: 10px;
+  margin: 5px;
+  box-sizing: border-box;
+  position: relative;
+  cursor: pointer;
+}
+@media screen and (max-width: 440px){
+  .c_item {
+    width: 100%;
+    height: auto;
+    min-height: 100px;
+  }
+}
+.c_title {
+  font-size: 22px;
+  font-weight: 600;
 }

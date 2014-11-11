@@ -35,9 +35,9 @@ app.directive('errSrc', function() {
 app.config(['$routeProvider','$locationProvider',
   function($routeProvider,$locationProvider){
     $routeProvider.
-      when('/policy',{
+      when('/policy/:pid',{
       templateUrl: 'partials/policy.html',
-      controller: 'IndexCtrl'
+      controller: 'PolicyCtrl'
     }).
       otherwise({
       redirectTo:'/',
@@ -71,6 +71,21 @@ app.factory('DataService', function ($http, $q){
 
 app.controller('IndexCtrl', ['$scope', 'DataService', '$location', '$sce', function ($scope, DataService, $location, $sce){
 
+  $scope.go = function(path){
+      $("body").scrollTop(0);
+      $location.path(path);
+  };
+
+
+  DataService.getData('policy').then(function(data){
+      $scope.policy = data;
+  });
+
+
+}]);
+
+app.controller('PolicyCtrl', ['$scope', 'DataService', '$location', '$sce', '$routeParams', function ($scope, DataService, $location, $sce, $routeParams){
+
   DataService.getData('parsed_issues').then(function(data){
       $scope.issues = data;
   });
@@ -97,7 +112,9 @@ app.controller('IndexCtrl', ['$scope', 'DataService', '$location', '$sce', funct
   });
 
   DataService.getData('policy').then(function(data){
-      $scope.policy = data;
+      if($routeParams.pid){
+          $scope.policy = data[$routeParams.pid];
+      }
   });
 
 
@@ -106,15 +123,18 @@ app.controller('IndexCtrl', ['$scope', 'DataService', '$location', '$sce', funct
     return $scope.focusQuestion === qid;
   };
 
+
+
   $scope.toggleQuestion = function(qid){
+
+
     if($scope.focusQuestion === qid){
-       $scope.focusQuestion = false;
-       $scope.focusQuestionTitle = null;
+        $scope.focusQuestion = false;
+        $scope.focusQuestionTitle = null;
 
     }else{
-      $scope.focusQuestion = qid;
-      $scope.focusQuestionTitle = $scope.questionsObj[qid].title;
-
+        $scope.focusQuestion = qid;
+        $scope.focusQuestionTitle = $scope.questionsObj[qid].title;
     }
 
   };
@@ -131,9 +151,15 @@ app.controller('IndexCtrl', ['$scope', 'DataService', '$location', '$sce', funct
     return $scope.policyShowState;
   };
 
+  $scope.resetFocus = function(){
+      console.log("RESET");
+
+      $scope.policyShowState = false;
+      $scope.focusQuestion = false;
+      $scope.focusQuestionTitle = null;
+  };
+
 
 
 }]);
-
-
 

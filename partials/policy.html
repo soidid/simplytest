@@ -1,25 +1,24 @@
 <div ng-include="'partials/nav.html'"></div>
 
-<div id="content">
+<div id="content" ng-click="resetFocus()">
 
 
   <div class="wrapper">
-     <div ng-repeat="p in policy" class="md-whiteframe-z1 p_item" ng-if="$index === 0">
+     <div class="md-whiteframe-z1 p_item" ng-if="policy" ng-click="$event.stopPropagation()">
           <div class="p_title" ng-click="togglePolicy()">
-            {{p.title}}
+            {{policy.title}}
             <div class="p_actionicon l_inline" ng-if="!showPolicy()"><i class="fa fa-angle-double-down"></i></div>
             <div class="p_actionicon l_inline" ng-if="showPolicy()"><i class="fa fa-angle-double-up"></i></div>
 
           </div>
-          <div ng-class="{'p_preview':!showPolicy(),'p_preview_hide':showPolicy()}">{{p.content | htmlToPlaintext| limitTo:200}}{{(p.content | htmlToPlaintext).length>200?'...':''}}<span class="p_seeall" ng-click="togglePolicy()">看完整政見</span>
+          <div ng-class="{'p_preview':!showPolicy(),'p_preview_hide':showPolicy()}">{{policy.content | htmlToPlaintext| limitTo:200}}{{(policy.content | htmlToPlaintext).length>200?'...':''}}
           </div>
 
           <div ng-class="{'p_fullcontent_hide':!showPolicy()}">
-              <div ng-bind-html="toTrusted(p.content)"></div>
+              <div ng-bind-html="toTrusted(policy.content)"></div>
 
           </div>
           <div class="l_center"><span class="p_seeall" ng-click="togglePolicy()" ng-if="showPolicy()"><i class="fa fa-angle-double-up"></i> 摺疊</span></div>
-
      </div>
   </div>
 
@@ -29,9 +28,9 @@
 <div class="wrapper">
 
   <!--ng-if="shouldShow(q.id)"-->
-  <div class="pa_totalq">共有 {{(questions | filter:query).length}} 題</div>
+  <div class="pa_totalq" >共有 {{(questions | filter:query).length}} 題</div>
 
-  <div ng-repeat="q in questions | filter:query | orderBy: 'signatures_count' : true" ng-class="{'md-whiteframe-z1':showQuestion(q.id),'q_item_active':showQuestion(q.id)}" class="q_item">
+  <div ng-repeat="q in questions | filter:query | orderBy: 'signatures_count' : true" ng-class="{'md-whiteframe-z1':showQuestion(q.id),'q_item_active':showQuestion(q.id)}" class="q_item" ng-click="$event.stopPropagation()">
 
     <div class="q_title l_inline" ng-class="{'q_title_active':showQuestion(q.id)}" ng-click="toggleQuestion(q.id)">
       <div class="q_order l_inline">{{$index+1}}</div>
@@ -40,7 +39,8 @@
 
     <!-- function tab goes here -->
         <div class="q_function l_inline">
-          <a class="button"><i class="fa fa-bullhorn"></i> 連署</a>
+          <span ng-if="!showQuestion(q.id)"><i class="fa fa-angle-double-down"></i></span>
+          <span ng-if="showQuestion(q.id)"><i class="fa fa-angle-double-up"></i></span>
         </div>
     <!-- ...................... -->
     </div>
@@ -57,11 +57,7 @@
 
 </div>
 
-  <!--
-  <div ng-repeat="q in questions | filter:query | filter: shouldShowFilter | orderBy: 'signatures_count' : true">
-    {{q.title}} http://taipei.wethepeople.tw/#!/question/{{q.id}}
-  </div>
-  -->
+
 
 </div>
 </div>
