@@ -358,11 +358,15 @@ a.button.facebook{
 #sidebar-container{
   z-index: 400;
   width: 100%;
-  height: 100%;
+  height: 0px;
+  overflow: hidden;
   background: white;
   position: absolute;
-  top: 50px;
   text-align: center;
+}
+#sidebar-container.show{
+  top: 50px;
+  height: 100%;
 
 }
 a.nav_item_sidebar {
@@ -376,18 +380,7 @@ a.nav_item_sidebar:hover {
   background: rgb(220,220,220);
 }
 
-/* Required for Triangle */
-.tri-up:before, .tri-up:after {
-  content: "";
-  position: absolute;
-  right: 18px;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-color: transparent;
-  border-bottom: 0;
-  z-index: 420;
-}
+
 /* Stroke */
 .tri-up:before {
   top: 43px;
@@ -402,9 +395,62 @@ a.nav_item_sidebar:hover {
   border-right: 10px solid transparent;
   border-bottom: 10px solid white;
 }
-.nav_item_right {
+.nav_list_toggle {
   position: absolute;
   cursor: pointer;
   top: 14px;
   right: 20px;
+}
+@media screen and (min-width: 600px){
+  .nav_list_toggle {
+    left: 20px;
+  }
+  #sidebar-container{
+    z-index: 99;
+    width: 300px;
+    height: 100%;
+    background: white;
+    position: absolute;
+    top: 50px;
+    left: -300px;
+    box-shadow: 0 0 6px rgba(0,0,0,.16),0 6px 12px rgba(0,0,0,.32);
+    text-align: left;
+
+    transition-property: all;
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+  }
+  #sidebar-container.show{
+    top: 50px;
+    left:0px;
+    overflow: auto;
+
+  }
+
+}
+
+/* ------------------------------------------------------------ */
+/* compose
+/* ------------------------------------------------------------ */
+
+.ask_item {
+  background-color: #db4437;
+  height: 56px;
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  width: 56px;
+
+  border-radius: 50%;
+  box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+  box-sizing: content-box;
+  cursor: pointer;
+  padding: 0;
+  z-index: 100;
+  text-align: center;
+}
+.ask_icon {
+  color: white;
+  font-size: 30px;
+  padding-top: 20px;
 }
