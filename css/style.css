@@ -351,3 +351,60 @@ a.button.facebook{
   font-size: 22px;
   font-weight: 600;
 }
+/* ------------------------------------------------------------ */
+/* sidebar
+/* ------------------------------------------------------------ */
+
+#sidebar-container{
+  z-index: 400;
+  width: 100%;
+  height: 100%;
+  background: white;
+  position: absolute;
+  top: 50px;
+  text-align: center;
+
+}
+a.nav_item_sidebar {
+  display: block;
+  padding: 10px;
+  color: #009688;
+  border-bottom: 1px solid rgb(240,240,240);
+
+}
+a.nav_item_sidebar:hover {
+  background: rgb(220,220,220);
+}
+
+/* Required for Triangle */
+.tri-up:before, .tri-up:after {
+  content: "";
+  position: absolute;
+  right: 18px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-color: transparent;
+  border-bottom: 0;
+  z-index: 420;
+}
+/* Stroke */
+.tri-up:before {
+  top: 43px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  }
+/* Fill */
+.tri-up:after {
+  top: 42px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid white;
+}
+.nav_item_right {
+  position: absolute;
+  cursor: pointer;
+  top: 14px;
+  right: 20px;
+}
